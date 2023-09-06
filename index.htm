@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+  <script type="text/javascript" src="functions.js" defer></script>
+  <script type="text/javascript" src="Strings.js" defer></script>
+  <script type="text/javascript" src="Objects.js" defer></script>
+  <script type="text/javascript" src="logic.js" defer></script>
+  <title>Exercises</title>
+</head>
+
+<body>
+
+  <header class="header">
+    <h1 class="header__h1">OOP</h1>
+    <nav class="header__nav">
+      <ul class="header__ul">
+        <li class="header__li"><a class="header__a" href="#functions">Functions</a></li>
+        <li class="header__li"><a class="header__a" href="#strings">Strings</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+    <h2 class="main__h2" id="functions">Functions Exercises</h2>
+    <h3 class="main__h3">Recursive fibonacci</h3>
+    <pre class="main__codeFragmentPre">
+      <code class="language-js" data-lang="js">
+<span color="#6C848E">
+/**
+* Recursive fibonacci
+* <span color="#C678DD">@param</span> <span color="#CCC">{<span color="#E5C07B">number</span>}</span> <span color="#E05E48">n</span> - The index of fibonacci number
+* <span color="#C678DD">@returns</span> <span color="#CCC">{<span color="#E5C07B">number</span>}</span> The nth fibonacci number.
+*/
+</span>
+<span color="#C678DD">const</span> <span color="#45afef">recursiveFibonacci</span> <span color="#56B6C2">=</span> <span color="#E05E48">n</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
+  <span color="#f92672">if</span> (<span color="#E05E48">n</span> <span color="#56B6C2">===</span> <span color="#ae81ff">1</span>) <span color="#f92672">return</span> <span color="#ae81ff">0</span>;
+  <span color="#f92672">if</span> (<span color="#E05E48">n</span> <span color="#56B6C2">===</span> <span color="#ae81ff">2</span>) <span color="#f92672">return</span> <span color="#ae81ff">1</span>;
+  <span color="#f92672">return</span> <span color="#E5C07B">memo</span><span color="#D18941">[<span color="#E05E48">n</span>]</span> <span color="#f92672">??</span> (<span color="#E5C07B">memo</span><span color="#D18941">[<span color="#E05E48">n</span>]</span> <span color="#f92672">=</span> <span color="#45afef">recursiveFibonacci</span>(<span color="#E05E48">n</span> <span color="#56B6C2">-</span> <span color="#ae81ff">1</span>) <span color="#56B6C2">+</span> <span color="#45afef">recursiveFibonacci</span>(<span color="#E05E48">n</span> <span color="#56B6C2">-</span> <span color="#ae81ff">2</span>));</span>
+<span>}</span>
+<span color="#C678DD">const</span> <span color="#E5C07B">memo</span> <span color="#56B6C2">=</span> <span color="#D18941">[]</span>;
+      </code>
+    </pre>
+
+    <h3 class="main__h3">Iterative fibonacci</h3>
+    <pre class="main__codeFragmentPre">
+      <code class="language-js" data-lang="js">
+<span color="#6C848E">
+/**
+* Iterative Fibonacci
+* <span color="#C678DD">@param</span> <span color="#CCC">{<span color="#E5C07B">number</span>}</span> <span color="#E05E48">n</span> - The index of fibonacci number
+* <span color="#C678DD">@returns</span> <span color="#CCC">{<span color="#E5C07B">number</span>}</span> The nth fibonacci number
+*/
+</span>
+<span color="#C678DD">const</span> <span color="#45afef">iterativeFibonacci</span> <span color="#56B6C2">=</span> <span color="#E05E48">n</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
+  <span color="#f92672">while</span> (<span color="#E05E48">n</span> > <span color="#E5C07B">sequence</span>.length) {
+    <span color="#E5C07B">sequence</span>.push(<span color="#E5C07B">sequence</span><span color="#D18941">[</span><span color="#E5C07B">sequence</span>.length <span color="#56B6C2">-</span> <span color="#ae81ff">1</span><span color="#D18941">]</span> <span color="#56B6C2">+</span> <span color="#E5C07B">sequence</span><span color="#D18941">[</span><span color="#E5C07B">sequence</span>.length <span color="#56B6C2">-</span> <span color="#ae81ff">2</span><span color="#D18941">]</span>);
+  }
+  <span color="#f92672">return</span> <span color="#E5C07B">sequence</span><span color="#D18941">[</span><span color="#E05E48">n</span> - <span color="#ae81ff">1</span><span color="#D18941">]</span>;
+}
+<span color="#C678DD">const</span> <span color="#E5C07B">sequence</span> <span color="#56B6C2">=</span> <span color="#D18941">[</span><span color="#ae81ff">0</span>, <span color="#ae81ff">1</span><span color="#D18941">]</span>;
+      </code>
+    </pre>
+
+    <h2 class="main__h2" id="strings">Strings Exercises</h2>
+    <h3 class="main__h3">Find palindromes</h3>
+    <pre class="main__codeFragmentPre">
+      <code class="language-js" data-lang="js">
+<span color="#6C848E">
+/**
+* Find Palindromes
+* <span color="#C678DD">@param</span> <span color="#CCC">{<span color="#E5C07B">string</span>}</span> <span color="#E05E48">text</span> - Text to analyze
+* <span color="#C678DD">@returns</span> <span color="#CCC">{<span color="#E5C07B">string[]</span>}</span> - List of palindromes
+*/
+</span>
+<span color="#C678DD">const</span> <span color="#45afef">findPalindromes</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
+
+  <span color="#75715E">// This function normalize words to clean accents and punctuation marks</span>
+  <span color="#C678DD">const</span> <span color="#E05E48">normalize</span> <span color="#56B6C2">=</span> <span color="#E05E48">str</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">str</span>.normalize(<span color="#E05E48">"NFD"</span>).replace(<span color="#D18941">/[\u0300-\u036f]/g</span>, <span color="#E05E48">""</span>).replace(<span color="#D18941">/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g</span>, <span color="#E05E48">""</span>).toLowerCase()
+  
+  <span color="#C678DD">const</span> <span color="#E5C07B">palindromes</span> <span color="#56B6C2">=</span> [];
+  <span color="#C678DD">const</span> <span color="#E5C07B">wordList</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span>.split(<span color="#E05E48">' '</span>);
+
+  <span color="#E5C07B">wordList</span>.map(<span color="#E05E48">word</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
+    <span color="#f92672">if</span> (<span color="#E05E48">normalize</span>(<span color="#E05E48">word</span>) <span color="#56B6C2">===</span> <span color="#E05E48">normalize</span>(<span color="#E05E48">word</span>).split(<span color="#E05E48">''</span>).reverse().join(<span color="#E05E48">''</span>)){
+      <span color="#E5C07B">palindromes</span>.push(<span color="#E05E48">normalize</span>(<span color="#E05E48">word</span>).toLowerCase());
+    }
+  })
+  <span color="#f92672">return</span> <span color="#E5C07B">palindromes</span>;
+}
+      </code>
+    </pre>
+
+    <h3 class="main__h3">Find anagrams</h3>
+    <pre class="main__codeFragmentPre">
+      <code class="language-js" data-lang="js">
+<span color="#6C848E">
+/**
+* Find Anagrams
+* <span color="#C678DD">@param</span> <span color="#CCC">{<span color="#E5C07B">string</span>}</span> <span color="#E05E48">text</span> - Text to analyze
+* <span color="#C678DD">@returns</span> <span color="#CCC">{}</span> - List of anagrams
+*/
+</span>
+<span color="#C678DD">const</span> <span color="#45afef">findAnagrams</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
+
+  <span color="#75715E">// This function normalize words to clean accents and punctuation marks</span>
+  <span color="#C678DD">const</span> <span color="#E05E48">normalize</span> <span color="#56B6C2">=</span> <span color="#E05E48">str</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">str</span>.normalize(<span color="#E05E48">"NFD"</span>).replace(<span color="#D18941">/[\u0300-\u036f]/g</span>, <span color="#E05E48">""</span>).replace(<span color="#D18941">/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g</span>, <span color="#E05E48">""</span>).toLowerCase()
+
+  <span color="#C678DD">const</span> <span color="#45afef">areAnagram</span> <span color="#56B6C2">=</span> ({ <span color="#E05E48">word1</span>, <span color="#E05E48">word2</span> }) <span color="#f92672"><span color="#C678DD">=></span></span> {
+    <span color="#f92672">if</span> (<span color="#E05E48">word1</span>.length <span color="#56B6C2">!==</span> <span color="#E05E48">word2</span>.length) <span color="#f92672">return</span> <span color="#fa2772">false</span>
+    <span color="#C678DD">const</span> <span color="#E5C07B">lettersList1</span> <span color="#56B6C2">=</span> <span color="#E05E48">word1</span>.split(<span color="#E05E48">''</span>);
+    <span color="#C678DD">const</span> <span color="#E5C07B">lettersList2</span> <span color="#56B6C2">=</span> <span color="#E05E48">word2</span>.split(<span color="#E05E48">''</span>);
+
+    <span color="#f92672">for</span> (<span color="#C678DD">const</span> <span color="#E05E48">letter</span> <span color="#f92672"><span color="#C678DD">of</span></span> <span color="#E5C07B">lettersList1</span>) {
+      <span color="#f92672">if</span> (<span color="#E5C07B">lettersList2</span>.includes(<span color="#E05E48">letter</span>)) <span color="#E5C07B">lettersList2</span>.splice(<span color="#E5C07B">lettersList2</span>.indexOf(<span color="#E05E48">letter</span>), <span color="#ae81ff">1</span>);
+      <span color="#fa2772">else</span> <span color="#f92672">return</span> <span color="#fa2772">false</span>
+    }
+    <span color="#f92672">return</span> <span color="#f92672">true</span>
+  }
+
+  <span color="#C678DD">const</span> <span color="#E5C07B">anagrams</span> <span color="#56B6C2">=</span> {};
+  <span color="#C678DD">const</span> <span color="#E5C07B">wordList</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span>.split(<span color="#E05E48">' '</span>);
+
+  <span color="#f92672">for</span> (<span color="#C678DD">let</span> <span color="#E05E48">word</span> <span color="#C678DD">of</span> <span color="#E5C07B">wordList</span>) {
+    <span color="#E05E48">word</span> <span color="#C678DD">=</span> <span color="#E05E48">normalize</span>(<span color="#E05E48">word</span>);
+    <span color="#f92672">if</span> (<span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length]) {
+      <span color="#C678DD">for</span>(<span color="#C678DD">const</span> <span color="#E05E48">subWord</span> <span color="#C678DD">of</span> <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length]) {
+        <span color="#f92672">if</span> (<span color="#45afef">areAnagram</span>({<span color="#E05E48">word1</span>: <span color="#E05E48">word</span>, <span color="#E05E48">word2</span>: <span color="#E05E48">subWord</span>})) {
+          <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length].push(<span color="#E05E48">word</span>);
+          <span color="#f92672">break</span>;
+        }
+      }
+    } <span color="#fa2772">else</span> <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length] <span color="#56B6C2">=</span> [<span color="#E05E48">word</span>]
+  }
+  <span color="#f92672">return</span> <span color="#45afef">Object</span>.values(<span color="#E5C07B">anagrams</span>).<span color="#45afef">filter</span>(<span color="#E05E48">list</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">list</span>.length <span color="#56B6C2">></span> <span color="#ae81ff">1</span>);
+}
+      </code>
+    </pre>
+
+    <h2 class="main__h2" id="strings">Objects Exercises</h2>
+    <h3 class="main__h3">Regular polygon</h3>
+    <pre class="main__codeFragmentPre">
+      <code class="language-js" data-lang="js">
+<span color="#6C848E">
+/**
+* Regular Polygon
+*/
+</span>
+<span color="#C678DD">function</span> <span color="#45afef">RegularPolygon</span>({<span color="#E5C07B">sides</span>, <span color="#E5C07B">sideLength</span>}) {
+  <span color="#E5C07B">this</span>.<span color="#E5C07B">sides</span> <span color="#56B6C2">=</span> <span color="#E5C07B">sides</span>;
+  <span color="#E5C07B">this</span>.<span color="#E5C07B">sideLength</span> <span color="#56B6C2">=</span> <span color="#E5C07B">sideLength</span>;
+  <span color="#E5C07B">this</span>.<span color="#E5C07B">getPerimeter</span> <span color="#56B6C2">=</span> () <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sides</span> <span color="#56B6C2">*</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sideLength</span>;
+  <span color="#E5C07B">this</span>.<span color="#E5C07B">getArea</span> <span color="#56B6C2">=</span> () <span color="#56B6C2">=></span> {
+    <span color="#C678DD">const</span> <span color="#E5C07B">halfCenterAngle</span> <span color="#56B6C2">=</span> <span color="#ae81ff">360</span> / (<span color="#ae81ff">2</span> * <span color="#E5C07B">this</span>.<span color="#E5C07B">sides</span>);
+    <span color="#C678DD">let</span> <span color="#E5C07B">apothem</span> <span color="#56B6C2">=</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sideLength</span> / (<span color="#ae81ff">2</span> * <span color="#ae81ff">Math</span>.<span color="#E5C07B">tan</span>(<span color="#E5C07B">halfCenterAngle</span> * <span color="#ae81ff">Math</span>.<span color="#E5C07B">PI</span> / <span color="#ae81ff">180</span>));
+    <span color="#E5C07B">apothem</span> <span color="#56B6C2">=</span> <span color="#ae81ff">parseInt</span>(<span color="#E5C07B">apothem</span> * <span color="#ae81ff">100000</span>) / <span color="#ae81ff">100000</span>; <span color="#75715E">// Round number to 5 decimal places</span>
+    <span color="#56B6C2">return</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">getPerimeter</span>() <span color="#56B6C2">*</span> <span color="#E5C07B">apothem</span> / <span color="#ae81ff">2</span>;
+  }
+}
+
+<span color="#C678DD">const</span> <span color="#E5C07B">polygon</span> <span color="#56B6C2">=</span> <span color="#fa2772">new</span> <span color="#45afef">RegularPolygon</span>({<span color="#E5C07B">sides</span>: <span color="#ae81ff">4</span>, <span color="#E5C07B">sideLength</span>: <span color="#ae81ff">3</span>})
+
+<span color="#45afef">console</span>.<span color="#E5C07B">log</span>(<span color="#E5C07B">"Área: "</span> <span color="#56B6C2">+</span> <span color="#E5C07B">polygon</span>.<span color="#E5C07B">getArea</span>())
+<span color="#45afef">console</span>.<span color="#E5C07B">log</span>(<span color="#E5C07B">"Perímetro: "</span> <span color="#56B6C2">+</span> <span color="#E5C07B">polygon</span>.<span color="#E5C07B">getPerimeter</span>())
+
+<span color="#6C848E">
+  // Written as an object literal it would be:
+</span>
+<span color="#C678DD">const</span> <span color="#E5C07B">polygon2</span> <span color="#56B6C2">=</span> {
+  <span color="#E5C07B">sides</span>: <span color="#ae81ff">4</span>,
+  <span color="#E5C07B">sideLength</span>: <span color="#ae81ff">3</span>,
+  <span color="#E5C07B">getPerimeter</span>: <span color="#f92672">function</span>()<span color="#56B6C2">{</span><span color="#f92672">return</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sides</span> <span color="#56B6C2">*</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sideLength</span><span color="#56B6C2">},</span>
+  <span color="#E5C07B">getArea</span>: <span color="#f92672">function</span>() <span color="#56B6C2">{</span>
+    <span color="#C678DD">const</span> <span color="#E5C07B">halfCenterAngle</span> <span color="#56B6C2">=</span> <span color="#ae81ff">360</span> / (<span color="#ae81ff">2</span> * <span color="#E5C07B">this</span>.<span color="#E5C07B">sides</span>);
+    <span color="#C678DD">let</span> <span color="#E5C07B">apothem</span> <span color="#56B6C2">=</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">sideLength</span> / (<span color="#ae81ff">2</span> * <span color="#ae81ff">Math</span>.<span color="#E5C07B">tan</span>(<span color="#E5C07B">halfCenterAngle</span> * <span color="#ae81ff">Math</span>.<span color="#E5C07B">PI</span> / <span color="#ae81ff">180</span>));
+    <span color="#E5C07B">apothem</span> <span color="#56B6C2">=</span> <span color="#ae81ff">parseInt</span>(<span color="#E5C07B">apothem</span> * <span color="#ae81ff">100000</span>) / <span color="#ae81ff">100000</span>; <span color="#75715E">// Round number to 5 decimal places</span>
+    <span color="#56B6C2">return</span> <span color="#E5C07B">this</span>.<span color="#E5C07B">getPerimeter</span>() <span color="#56B6C2">*</span> <span color="#E5C07B">apothem</span> / <span color="#ae81ff">2</span>;
+  <span color="#56B6C2">}</span>
+}
+
+<span color="#45afef">console</span>.<span color="#E5C07B">log</span>(<span color="#E5C07B">"Área: "</span> <span color="#56B6C2">+</span> <span color="#E5C07B">polygon2</span>.<span color="#E5C07B">getArea</span>())
+<span color="#45afef">console</span>.<span color="#E5C07B">log</span>(<span color="#E5C07B">"Perímetro: "</span> <span color="#56B6C2">+</span> <span color="#E5C07B">polygon2</span>.<span color="#E5C07B">getPerimeter</span>())
+      </code>
+    </pre>
+
+    <h2 class="main__h2" id="p5">P5 Exercises</h2>
+    <h3 class="main__h3">Atlético nacional</h3>
+
+    <div class="p5">
+      <script type="text/javascript" src="p5.js"></script>
+    </div>
+
+  </main>
+  <aside></aside>
+  <footer class="footer"></footer>
+
+</body>
+
+</html>
+
+<!-- aa123456 -->
