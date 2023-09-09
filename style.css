@@ -58,7 +58,7 @@ body {
 }
 
 .main__h3 {
-  margin: 5px 10px;
+  margin: 45px 10px 5px 10px;
   font-size: 1.7rem;
   font-family: consolas;
   color: #ccc;
@@ -100,3 +100,14 @@ body {
   position: relative;
   left: -50px;
 } */
+
+canvas {
+  border-radius: 10px;
+}
+
+.p5_example {
+  width: 90%;
+  height: 700px;
+  display: block;
+  margin: auto;
+}

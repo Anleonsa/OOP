@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script>
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.sound.min.js"></script> -->
   <script type="text/javascript" src="functions.js" defer></script>
   <script type="text/javascript" src="Strings.js" defer></script>
   <script type="text/javascript" src="Objects.js" defer></script>
@@ -22,6 +22,8 @@
       <ul class="header__ul">
         <li class="header__li"><a class="header__a" href="#functions">Functions</a></li>
         <li class="header__li"><a class="header__a" href="#strings">Strings</a></li>
+        <li class="header__li"><a class="header__a" href="#objects">Objects</a></li>
+        <li class="header__li"><a class="header__a" href="#p5">P5</a></li>
       </ul>
     </nav>
   </header>
@@ -82,7 +84,9 @@
   <span color="#75715E">// This function normalize words to clean accents and punctuation marks</span>
   <span color="#C678DD">const</span> <span color="#E05E48">normalize</span> <span color="#56B6C2">=</span> <span color="#E05E48">str</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">str</span>.normalize(<span color="#E05E48">"NFD"</span>).replace(<span color="#D18941">/[\u0300-\u036f]/g</span>, <span color="#E05E48">""</span>).replace(<span color="#D18941">/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g</span>, <span color="#E05E48">""</span>).toLowerCase()
   
+  <span color="#75715E">// List of found palindromes at the text</span>
   <span color="#C678DD">const</span> <span color="#E5C07B">palindromes</span> <span color="#56B6C2">=</span> [];
+
   <span color="#C678DD">const</span> <span color="#E5C07B">wordList</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span>.split(<span color="#E05E48">' '</span>);
 
   <span color="#E5C07B">wordList</span>.map(<span color="#E05E48">word</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
@@ -98,50 +102,56 @@
     <h3 class="main__h3">Find anagrams</h3>
     <pre class="main__codeFragmentPre">
       <code class="language-js" data-lang="js">
-<span color="#6C848E">
-/**
-* Find Anagrams
-* <span color="#C678DD">@param</span> <span color="#CCC">{<span color="#E5C07B">string</span>}</span> <span color="#E05E48">text</span> - Text to analyze
-* <span color="#C678DD">@returns</span> <span color="#CCC">{}</span> - List of anagrams
-*/
-</span>
-<span color="#C678DD">const</span> <span color="#45afef">findAnagrams</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span> <span color="#f92672"><span color="#C678DD">=></span></span> {
-
-  <span color="#75715E">// This function normalize words to clean accents and punctuation marks</span>
-  <span color="#C678DD">const</span> <span color="#E05E48">normalize</span> <span color="#56B6C2">=</span> <span color="#E05E48">str</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">str</span>.normalize(<span color="#E05E48">"NFD"</span>).replace(<span color="#D18941">/[\u0300-\u036f]/g</span>, <span color="#E05E48">""</span>).replace(<span color="#D18941">/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g</span>, <span color="#E05E48">""</span>).toLowerCase()
-
-  <span color="#C678DD">const</span> <span color="#45afef">areAnagram</span> <span color="#56B6C2">=</span> ({ <span color="#E05E48">word1</span>, <span color="#E05E48">word2</span> }) <span color="#f92672"><span color="#C678DD">=></span></span> {
-    <span color="#f92672">if</span> (<span color="#E05E48">word1</span>.length <span color="#56B6C2">!==</span> <span color="#E05E48">word2</span>.length) <span color="#f92672">return</span> <span color="#fa2772">false</span>
-    <span color="#C678DD">const</span> <span color="#E5C07B">lettersList1</span> <span color="#56B6C2">=</span> <span color="#E05E48">word1</span>.split(<span color="#E05E48">''</span>);
-    <span color="#C678DD">const</span> <span color="#E5C07B">lettersList2</span> <span color="#56B6C2">=</span> <span color="#E05E48">word2</span>.split(<span color="#E05E48">''</span>);
-
-    <span color="#f92672">for</span> (<span color="#C678DD">const</span> <span color="#E05E48">letter</span> <span color="#f92672"><span color="#C678DD">of</span></span> <span color="#E5C07B">lettersList1</span>) {
-      <span color="#f92672">if</span> (<span color="#E5C07B">lettersList2</span>.includes(<span color="#E05E48">letter</span>)) <span color="#E5C07B">lettersList2</span>.splice(<span color="#E5C07B">lettersList2</span>.indexOf(<span color="#E05E48">letter</span>), <span color="#ae81ff">1</span>);
-      <span color="#fa2772">else</span> <span color="#f92672">return</span> <span color="#fa2772">false</span>
-    }
-    <span color="#f92672">return</span> <span color="#f92672">true</span>
-  }
-
-  <span color="#C678DD">const</span> <span color="#E5C07B">anagrams</span> <span color="#56B6C2">=</span> {};
-  <span color="#C678DD">const</span> <span color="#E5C07B">wordList</span> <span color="#56B6C2">=</span> <span color="#E05E48">text</span>.split(<span color="#E05E48">' '</span>);
-
-  <span color="#f92672">for</span> (<span color="#C678DD">let</span> <span color="#E05E48">word</span> <span color="#C678DD">of</span> <span color="#E5C07B">wordList</span>) {
-    <span color="#E05E48">word</span> <span color="#C678DD">=</span> <span color="#E05E48">normalize</span>(<span color="#E05E48">word</span>);
-    <span color="#f92672">if</span> (<span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length]) {
-      <span color="#C678DD">for</span>(<span color="#C678DD">const</span> <span color="#E05E48">subWord</span> <span color="#C678DD">of</span> <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length]) {
-        <span color="#f92672">if</span> (<span color="#45afef">areAnagram</span>({<span color="#E05E48">word1</span>: <span color="#E05E48">word</span>, <span color="#E05E48">word2</span>: <span color="#E05E48">subWord</span>})) {
-          <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length].push(<span color="#E05E48">word</span>);
-          <span color="#f92672">break</span>;
-        }
-      }
-    } <span color="#fa2772">else</span> <span color="#E5C07B">anagrams</span>[<span color="#E05E48">word</span>.length] <span color="#56B6C2">=</span> [<span color="#E05E48">word</span>]
-  }
-  <span color="#f92672">return</span> <span color="#45afef">Object</span>.values(<span color="#E5C07B">anagrams</span>).<span color="#45afef">filter</span>(<span color="#E05E48">list</span> <span color="#f92672"><span color="#C678DD">=></span></span> <span color="#E05E48">list</span>.length <span color="#56B6C2">></span> <span color="#ae81ff">1</span>);
-}
+        <span style="color: #E2C08D;">
+          <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">areAnagram</span> = ({ <span style="color: #E2C08D;">word1</span>, <span style="color: #E2C08D;">word2</span> }) => {
+            <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">word1</span>.length !== <span style="color: #EF5350;">word2</span>.length) <span style="color: #E2C08D;">return</span> <span style="color: #E57373;">false</span>;
+            <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList1</span> = <span style="color: #EF5350;">word1</span>.split('');
+            <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList2</span> = <span style="color: #EF5350;">word2</span>.split('');
+    
+            <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">letter</span> of <span style="color: #E2C08D;">lettersList1</span>) {
+              <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">lettersList2</span>.includes(<span style="color: #EF5350;">letter</span>)) <span style="color: #EF5350;">lettersList2</span>.splice(<span style="color: #EF5350;">lettersList2</span>.indexOf(<span style="color: #EF5350;">letter</span>), 1);
+              <span style="color: #E2C08D;">else return</span> <span style="color: #E57373;">false</span>;
+            }
+            <span style="color: #E2C08D;">return</span> <span style="color: #A9DC76;">true</span>;
+          };
+        </span>
+    
+        <span style="color: #C792EA;">
+          <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">findAnagrams</span> = <span style="color: #EF5350;">text</span> => {
+            <span style="color: #E2C08D;">// This function normalize words to clean accents and punctuation marks</span>
+            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">normalize</span> = <span style="color: #EF5350;">str</span> => <span style="color: #EF5350;">str</span>.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g, "").toLowerCase();
+    
+            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">orderedLetters</span> = {};
+            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">wordList</span> = <span style="color: #EF5350;">text</span>.split(' ');
+    
+            <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">let</span> <span style="color: #EF5350;">word</span> of <span style="color: #EF5350;">wordList</span>) {
+              <span style="color: #EF5350;">word</span> = <span style="color: #EF5350;">normalize</span>(<span style="color: #EF5350;">word</span>);
+    
+              <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
+                <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">subList</span> of <span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
+                  <span style="color: #E2C08D;">if</span> (areAnagram({ <span style="color: #EF5350;">word1:</span> <span style="color: #EF5350;">word</span>, <span style="color: #EF5350;">word2:</span> <span style="color: #EF5350;">subList[0]</span> })) {
+                    <span style="color: #EF5350;">subList</span>.push(<span style="color: #EF5350;">word</span>);
+                    <span style="color: #569CD6;">break</span>;
+                  }
+                }
+                <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length].push([<span style="color: #EF5350;">word</span>]);
+              } <span style="color: #569CD6;">else</span> <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length] = [[<span style="color: #EF5350;">word</span>]];
+            }
+    
+            <span style="color: #A9DC76;">const</span> <span style="color: #D69A2E;">anagrams</span> = [];
+            <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">const</span> <span style="color: #569CD6;">list</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #D69A2E;">orderedLetters</span>)) {
+              <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">subList</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #569CD6;">list</span>)) {
+                <span style="color: #569CD6;">if</span> (<span style="color: #D69A2E;">subList</span>.length > 1) <span style="color: #D69A2E;">anagrams</span>.push(<span style="color: #D69A2E;">subList</span>);
+              }
+            }
+    
+            <span style="color: #569CD6;">return</span> <span style="color: #D69A2E;">anagrams</span>;
+          };
+        </span>
       </code>
     </pre>
 
-    <h2 class="main__h2" id="strings">Objects Exercises</h2>
+    <h2 class="main__h2" id="objects">Objects Exercises</h2>
     <h3 class="main__h3">Regular polygon</h3>
     <pre class="main__codeFragmentPre">
       <code class="language-js" data-lang="js">
@@ -187,12 +197,52 @@
       </code>
     </pre>
 
-    <h2 class="main__h2" id="p5">P5 Exercises</h2>
-    <h3 class="main__h3">Atlético nacional</h3>
+    <h3 class="main__h3">Regular polygon with getters and setters</h3>
+    <pre class="main__codeFragmentPre" style="background-color: #2d2d2d; color: #abb2bf;">
+      <code class="language-js" data-lang="js">
+<span style="color: #569cd6;">/**</span>
+<span style="color: #569cd6;"> * Regular polygon with getters and setters</span>
+<span style="color: #569cd6;"> */</span>
+<span style="color: #c586c0;">const</span> poly = {
+  <span style="color: #d19a66;">sides</span>: <span style="color: #98c379;">4</span>,
+  <span style="color: #d19a66;">sideLength</span>: <span style="color: #98c379;">3</span>,
 
-    <div class="p5">
-      <script type="text/javascript" src="p5.js"></script>
-    </div>
+  <span style="color: #569cd6;">get</span> <span style="color: #b5cea8;">getSides</span>() {
+    <span style="color: #569cd6;">return</span> this.sides;
+  },
+  <span style="color: #569cd6;">set</span> <span style="color: #b5cea8;">setSides</span>(newSides) {
+    this.sides = newSides;
+  },
+
+  <span style="color: #569cd6;">get</span> <span style="color: #b5cea8;">getSideLength</span>() {
+    <span style="color: #569cd6;">return</span> this.sideLength;
+  },
+  <span style="color: #569cd6;">set</span> <span style="color: #b5cea8;">setSideLength</span>(newSideLength) {
+    this.sideLength = newSideLength;
+  },
+
+  <span style="color: #569cd6;">get</span> <span style="color: #b5cea8;">getPerimeter</span>() {
+    <span style="color: #569cd6;">return</span> this.sides * this.sideLength;
+  },
+  <span style="color: #569cd6;">get</span> <span style="color: #b5cea8;">getArea</span>() {
+    <span style="color: #569cd6;">const</span> halfCenterAngle = <span style="color: #98c379;">360</span> / (<span style="color: #98c379;">2</span> * this.sides);
+    <span style="color: #569cd6;">let</span> apothem = this.sideLength / (<span style="color: #98c379;">2</span> * Math.tan(halfCenterAngle * Math.PI / <span style="color: #98c379;">180</span>));
+    apothem = parseInt(apothem * <span style="color: #98c379;">100000</span>) / <span style="color: #98c379;">100000</span>; <span style="color: #569cd6;">// Round number to 5 decimal places</span>
+    <span style="color: #569cd6;">return</span> this.getPerimeter() * apothem / <span style="color: #98c379;">2</span>;
+  }
+}
+      </code>
+    </pre>
+
+
+    <h2 class="main__h2" id="p5">P5 Exercises</h2>
+    <h3 class="main__h3">Napoli logo</h3>
+    <iframe class="p5_example" src="https://editor.p5js.org/anleonsa/sketches/d0vgX5DeS"></iframe>
+
+    <h3 class="main__h3">Fibonacci sequence</h3>
+    <iframe class="p5_example" src="https://editor.p5js.org/anleonsa/sketches/NR1anOHEc"></iframe>
+
+
 
   </main>
   <aside></aside>
