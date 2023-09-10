@@ -102,52 +102,57 @@
     <h3 class="main__h3">Find anagrams</h3>
     <pre class="main__codeFragmentPre">
       <code class="language-js" data-lang="js">
-        <span style="color: #E2C08D;">
-          <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">areAnagram</span> = ({ <span style="color: #E2C08D;">word1</span>, <span style="color: #E2C08D;">word2</span> }) => {
-            <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">word1</span>.length !== <span style="color: #EF5350;">word2</span>.length) <span style="color: #E2C08D;">return</span> <span style="color: #E57373;">false</span>;
-            <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList1</span> = <span style="color: #EF5350;">word1</span>.split('');
-            <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList2</span> = <span style="color: #EF5350;">word2</span>.split('');
+<span style="color: #E2C08D;">
+  <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">areAnagram</span> = ({ <span style="color: #E2C08D;">word1</span>, <span style="color: #E2C08D;">word2</span> }) => {
+    <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">word1</span>.length !== <span style="color: #EF5350;">word2</span>.length) <span style="color: #E2C08D;">return</span> <span style="color: #E57373;">false</span>;
+    <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList1</span> = <span style="color: #EF5350;">word1</span>.split('');
+    <span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">lettersList2</span> = <span style="color: #EF5350;">word2</span>.split('');
+
+    <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">letter</span> of <span style="color: #E2C08D;">lettersList1</span>) {
+      <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">lettersList2</span>.includes(<span style="color: #EF5350;">letter</span>)) <span style="color: #EF5350;">lettersList2</span>.splice(<span style="color: #EF5350;">lettersList2</span>.indexOf(<span style="color: #EF5350;">letter</span>), 1);
+      <span style="color: #E2C08D;">else return</span> <span style="color: #E57373;">false</span>;
+    }
+    <span style="color: #E2C08D;">return</span> <span style="color: #A9DC76;">true</span>;
+  };
+</span>
+<span style="color: #C792EA;">
+  <span color="#6C848E">
+  /**
+  * Find Palindromes
+  */
+  </span>
+  <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">findAnagrams</span> = <span style="color: #EF5350;">text</span> => {
     
-            <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">letter</span> of <span style="color: #E2C08D;">lettersList1</span>) {
-              <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">lettersList2</span>.includes(<span style="color: #EF5350;">letter</span>)) <span style="color: #EF5350;">lettersList2</span>.splice(<span style="color: #EF5350;">lettersList2</span>.indexOf(<span style="color: #EF5350;">letter</span>), 1);
-              <span style="color: #E2C08D;">else return</span> <span style="color: #E57373;">false</span>;
-            }
-            <span style="color: #E2C08D;">return</span> <span style="color: #A9DC76;">true</span>;
-          };
-        </span>
-    
-        <span style="color: #C792EA;">
-          <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">findAnagrams</span> = <span style="color: #EF5350;">text</span> => {
-            <span style="color: #E2C08D;">// This function normalize words to clean accents and punctuation marks</span>
-            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">normalize</span> = <span style="color: #EF5350;">str</span> => <span style="color: #EF5350;">str</span>.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g, "").toLowerCase();
-    
-            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">orderedLetters</span> = {};
-            <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">wordList</span> = <span style="color: #EF5350;">text</span>.split(' ');
-    
-            <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">let</span> <span style="color: #EF5350;">word</span> of <span style="color: #EF5350;">wordList</span>) {
-              <span style="color: #EF5350;">word</span> = <span style="color: #EF5350;">normalize</span>(<span style="color: #EF5350;">word</span>);
-    
-              <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
-                <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">subList</span> of <span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
-                  <span style="color: #E2C08D;">if</span> (areAnagram({ <span style="color: #EF5350;">word1:</span> <span style="color: #EF5350;">word</span>, <span style="color: #EF5350;">word2:</span> <span style="color: #EF5350;">subList[0]</span> })) {
-                    <span style="color: #EF5350;">subList</span>.push(<span style="color: #EF5350;">word</span>);
-                    <span style="color: #569CD6;">break</span>;
-                  }
-                }
-                <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length].push([<span style="color: #EF5350;">word</span>]);
-              } <span style="color: #569CD6;">else</span> <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length] = [[<span style="color: #EF5350;">word</span>]];
-            }
-    
-            <span style="color: #A9DC76;">const</span> <span style="color: #D69A2E;">anagrams</span> = [];
-            <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">const</span> <span style="color: #569CD6;">list</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #D69A2E;">orderedLetters</span>)) {
-              <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">subList</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #569CD6;">list</span>)) {
-                <span style="color: #569CD6;">if</span> (<span style="color: #D69A2E;">subList</span>.length > 1) <span style="color: #D69A2E;">anagrams</span>.push(<span style="color: #D69A2E;">subList</span>);
-              }
-            }
-    
-            <span style="color: #569CD6;">return</span> <span style="color: #D69A2E;">anagrams</span>;
-          };
-        </span>
+    <span style="color: #6c848e;">// This function normalize words to clean accents and punctuation marks</span>
+    <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">normalize</span> = <span style="color: #EF5350;">str</span> => <span style="color: #EF5350;">str</span>.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[.,;:¿?!¡(){}"«»“”‘’'\[\]-]+/g, "").toLowerCase();
+
+    <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">orderedLetters</span> = {};
+    <span style="color: #A9DC76;">const</span> <span style="color: #EF5350;">wordList</span> = <span style="color: #EF5350;">text</span>.split(' ');
+
+    <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">let</span> <span style="color: #EF5350;">word</span> of <span style="color: #EF5350;">wordList</span>) {
+      <span style="color: #EF5350;">word</span> = <span style="color: #EF5350;">normalize</span>(<span style="color: #EF5350;">word</span>);
+
+      <span style="color: #E2C08D;">if</span> (<span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
+        <span style="color: #E2C08D;">for</span> (<span style="color: #A9DC76;">const</span> <span style="color: #E2C08D;">subList</span> of <span style="color: #EF5350;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length]) {
+          <span style="color: #E2C08D;">if</span> (areAnagram({ <span style="color: #EF5350;">word1:</span> <span style="color: #EF5350;">word</span>, <span style="color: #EF5350;">word2:</span> <span style="color: #EF5350;">subList[0]</span> })) {
+            <span style="color: #EF5350;">subList</span>.push(<span style="color: #EF5350;">word</span>);
+            <span style="color: #569CD6;">break</span>;
+          }
+        }
+        <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length].push([<span style="color: #EF5350;">word</span>]);
+      } <span style="color: #569CD6;">else</span> <span style="color: #D69A2E;">orderedLetters</span>[<span style="color: #EF5350;">word</span>.length] = [[<span style="color: #EF5350;">word</span>]];
+    }
+
+    <span style="color: #A9DC76;">const</span> <span style="color: #D69A2E;">anagrams</span> = [];
+    <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">const</span> <span style="color: #569CD6;">list</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #D69A2E;">orderedLetters</span>)) {
+      <span style="color: #569CD6;">for</span> (<span style="color: #D69A2E;">subList</span> of <span style="color: #EF5350;">Object.values</span>(<span style="color: #569CD6;">list</span>)) {
+        <span style="color: #569CD6;">if</span> (<span style="color: #D69A2E;">subList</span>.length > 1) <span style="color: #D69A2E;">anagrams</span>.push(<span style="color: #D69A2E;">subList</span>);
+      }
+    }
+
+    <span style="color: #569CD6;">return</span> <span style="color: #D69A2E;">anagrams</span>;
+  };
+</span>
       </code>
     </pre>
 
